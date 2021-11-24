@@ -156,7 +156,7 @@ void pagar(color warnaPagar, color warnaPagarDimensi, color warnaTiangPagar) {
     rect(0,410,width,10);
     
     //dimensi pagar
-    fill(warnaPagarDimensi);
+    fill(warnaTiangPagar);
     rect(0,227,width,3);
     rect(0,327,width,3);
     rect(0,407,width,3);
@@ -165,7 +165,7 @@ void pagar(color warnaPagar, color warnaPagarDimensi, color warnaTiangPagar) {
     rect(1135,240,3,230);
     
     //tiang pagar
-    fill(warnaTiangPagar);
+    fill(warnaPagarDimensi);
     rect(100,240,35,230);
     rect(600,240,35,230);
     rect(1100,240,35,230);
