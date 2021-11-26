@@ -1,10 +1,20 @@
 PImage person;
+PImage train;
+PShape person1;
 float xPerson = 580;
 float yPerson = 311;
+float xTrain = -13280;
+float xTrainBegin = -13280;
+float xTrainStop = 1303;
+float frame = 1;
+boolean isBerubah = false;
+boolean lagiJalan = false;
 
 void setup() {
     size(1280, 720, P3D);
     person = loadImage("person1.png");
+    train = loadImage("kereta1.png");
+    person1 = loadShape("person1.svg");
 }
 
 void draw() {
@@ -13,95 +23,35 @@ void draw() {
     pushMatrix();
     translate(0, 0, 100);
     image(person, xPerson, yPerson);
+    image(train, xTrain, 0);
+    // shape(person1, xPerson, yPerson);
     popMatrix();
-    // image(person2, 150, 0);
-    // image(person3, 350, 0);
-}
-
-// ! ERDI
-
-color background = #16C6F5;
-color warnaAwan = #E5E5E5;
-color pohon1 = #349847;
-color pohon2 = #267E31;
-color pohon3 = #36A744;
-color warnaTrotoar1 = #292936;
-color warnaTrotoar2 = #5A491B;
-color warnaTrotoar3 = #BBACB1;
-color jalanan = #6A585D;
-color warnaPagar = #2B2D35;
-color warnaTiangPagar = #2B2D35;
-color warnaDimensiPagar = #7D7D89;
-
-
-void bgErdi() {
     
-    //background = #16C6F5;
-    background(background);
-    //awan
-    awan(0,114,warnaAwan);
-    awan(600,100,warnaAwan);
-    awan(320,120,warnaAwan);
-    awan(900,120,warnaAwan);
-    //pohon
     pushMatrix();
-    translate(0, 0, 30);
-        pushMatrix();
-            translate(0,0,12);
-            pohon(100,370,pohon1);
-            pohon(400,370,pohon2);
-        popMatrix();
-        pohon(250,355,pohon3);
-        pohon(500,350,pohon1);
-        pushMatrix();
-            translate(0,0,9);
-            pohon(620,360,pohon2);
-        popMatrix();
-        pushMatrix();
-            translate(0,0,6);
-            pohon(700,400,pohon1);
-        popMatrix();
-        pushMatrix();
-            translate(0,0,3);
-            pohon(1200,360,pohon3);
-            pohon(880,340,pohon2);
-        popMatrix();
-        pohon(1070,370,pohon1);
+    translate(0, 0, 200);
     popMatrix();
     
+    if (lagiJalan) {
+        if (xTrain > xTrainStop) {
+            xTrain = xTrainBegin;
+            lagiJalan = false;
+            if (frame == 3) {
+                train = loadImage("kereta2.png");
+            }
+        }
+        xTrain += 100;
+    }
     
-    
-    //pagar
-    pushMatrix();
-    translate(0,0,50);
-    dasarPagar(warnaTrotoar1, warnaTrotoar2, warnaTrotoar3, jalanan);
-    pagar(warnaPagar, warnaTiangPagar ,warnaDimensiPagar);
-    popMatrix();
-    
-    
-    
-    //System.out.println(mouseX+" "+mouseY);
-}
-
-void keyPressed() {
-    if (key == CODED) {
-        if (keyCode == UP) {
+    if (xTrain == xTrainBegin + (100 * 20)) {
+        if (frame == 1) {
+            lagiJalan = true;
             background = #16C6F5;
-            warnaAwan = #E5E5E5;
-            pohon1 = #349847;
-            pohon2 = #267E31;
-            pohon3 = #36A744;
-            warnaTrotoar1 = #292936;
-            warnaTrotoar2 = #5A491B;
-            warnaTrotoar3 = #BBACB1;
-            jalanan = #6A585D;
-            warnaPagar = #2B2D35;
-            warnaTiangPagar = #2B2D35;
-            warnaDimensiPagar = #7D7D89;
-            person = loadImage("person1.png");
-            xPerson = 580;
-            yPerson = 311;
-        } else if (keyCode == DOWN) {
+            person = loadImage("person2.png");
+            xPerson = 583;
+            yPerson = 270;
+            frame++;
+        } else if (frame == 2) {
+            lagiJalan = true;
             background = #FCBF2C;
             warnaAwan = #FCEE56;
             pohon1 = #98561D;
@@ -117,9 +67,83 @@ void keyPressed() {
             person = loadImage("person3.png");
             xPerson = 599;
             yPerson = 267;
-        } 
-    } else {
-        background = #ff0000;
+            frame++;
+        } else if (frame == 3) {
+            xPerson = 10000;
+        }
+    }
+    
+    // image(person2, 150, 0);
+    // image(person3, 350, 0);
+}
+
+// ERDI
+
+color background = #A2D9F6;
+color warnaAwan = #E5E5E5;
+color pohon1 = #349847;
+color pohon2 = #267E31;
+color pohon3 = #36A744;
+color warnaTrotoar1 = #292936;
+color warnaTrotoar2 = #5A491B;
+color warnaTrotoar3 = #BBACB1;
+color jalanan = #6A585D;
+color warnaPagar = #2B2D35;
+color warnaTiangPagar = #2B2D35;
+color warnaDimensiPagar = #7D7D89;
+
+
+void bgErdi() {
+    
+    //background= #16C6F5;
+    background(background);
+    //awan
+    awan(0,114,warnaAwan);
+    awan(600,100,warnaAwan);
+    awan(320,120,warnaAwan);
+    awan(900,120,warnaAwan);
+    //pohon
+    pushMatrix();
+    translate(0,0, 30);
+    pushMatrix();
+    translate(0,0,12);
+    pohon(100,370,pohon1);
+    pohon(400,370,pohon2);
+    popMatrix();
+    pohon(250,355,pohon3);
+    pohon(500,350,pohon1);
+    pushMatrix();
+    translate(0,0,9);
+    pohon(620,360,pohon2);
+    popMatrix();
+    pushMatrix();
+    translate(0,0,6);
+    pohon(700,400,pohon1);
+    popMatrix();
+    pushMatrix();
+    translate(0,0,3);
+    pohon(1200,360,pohon3);
+    pohon(880,340,pohon2);
+    popMatrix();
+    pohon(1070,370,pohon1);
+    popMatrix();
+    
+    //pagar
+    pushMatrix();
+    translate(0,0,50);
+    dasarPagar(warnaTrotoar1, warnaTrotoar2, warnaTrotoar3, jalanan);
+    pagar(warnaPagar, warnaTiangPagar ,warnaDimensiPagar);
+    popMatrix();
+    
+}
+
+
+void keyPressed() {
+    if (key == CODED) {
+        if (keyCode == RIGHT) {
+            println("Jalan");
+            lagiJalan = true;
+        }
     }
 }
 
@@ -156,7 +180,7 @@ void pohon(float x, float y, color daun) {
     noStroke();
     pushMatrix();
     translate(0,0,2);
-    ellipse(x + 30,y-20, 230, 280);
+    ellipse(x + 30,y - 20, 230, 280);
     popMatrix();
 }
 
