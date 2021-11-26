@@ -3,13 +3,17 @@ float xPerson = 580;
 float yPerson = 311;
 
 void setup() {
-    size(1280, 720);
+    size(1280, 720, P3D);
     person = loadImage("person1.png");
 }
 
 void draw() {
+    // rotateY(-mouseX * 0.0080);
     bgErdi();
+    pushMatrix();
+    translate(0, 0, 100);
     image(person, xPerson, yPerson);
+    popMatrix();
     // image(person2, 150, 0);
     // image(person3, 350, 0);
 }
@@ -30,33 +34,49 @@ color warnaTiangPagar = #2B2D35;
 color warnaDimensiPagar = #7D7D89;
 
 
-
 void bgErdi() {
     
     //background = #16C6F5;
-    
     background(background);
     //awan
     awan(0,114,warnaAwan);
-    awan(320,120,warnaAwan);
     awan(600,100,warnaAwan);
+    awan(320,120,warnaAwan);
     awan(900,120,warnaAwan);
-    
     //pohon
-    pohon(100,370,pohon1);
-    pohon(400,370,pohon2);
-    pohon(300,355,pohon3);
-    pohon(600,360,pohon2);
-    pohon(700,400,pohon3);
-    pohon(500,350,pohon1);
-    pohon(1070,370,pohon1);
-    pohon(880,340,pohon2);
-    pohon(1200,360,pohon3);
+    pushMatrix();
+    translate(0, 0, 30);
+        pushMatrix();
+            translate(0,0,12);
+            pohon(100,370,pohon1);
+            pohon(400,370,pohon2);
+        popMatrix();
+        pohon(250,355,pohon3);
+        pohon(500,350,pohon1);
+        pushMatrix();
+            translate(0,0,9);
+            pohon(620,360,pohon2);
+        popMatrix();
+        pushMatrix();
+            translate(0,0,6);
+            pohon(700,400,pohon1);
+        popMatrix();
+        pushMatrix();
+            translate(0,0,3);
+            pohon(1200,360,pohon3);
+            pohon(880,340,pohon2);
+        popMatrix();
+        pohon(1070,370,pohon1);
+    popMatrix();
+    
     
     
     //pagar
-    pagar(warnaPagar, warnaTiangPagar ,warnaDimensiPagar);
+    pushMatrix();
+    translate(0,0,50);
     dasarPagar(warnaTrotoar1, warnaTrotoar2, warnaTrotoar3, jalanan);
+    pagar(warnaPagar, warnaTiangPagar ,warnaDimensiPagar);
+    popMatrix();
     
     
     
@@ -128,10 +148,16 @@ void pohon(float x, float y, color daun) {
     
     ellipse(x + 55, y - 60, 180, 180);
     ellipse(x + 60, y, 180, 180);
+    pushMatrix();
+    translate(0,0,1);
     ellipse(x + 20, y - 125, 180, 180);
+    popMatrix();
     
     noStroke();
-    ellipse(x + 30,y - 25, 210, 220);
+    pushMatrix();
+    translate(0,0,2);
+    ellipse(x + 30,y-20, 230, 280);
+    popMatrix();
 }
 
 //TROTOAR
@@ -165,9 +191,12 @@ void pagar(color warnaPagar, color warnaPagarDimensi, color warnaTiangPagar) {
     rect(1135,240,3,230);
     
     //tiang pagar
+    pushMatrix();
+    translate(0, 0, 2);
     fill(warnaPagarDimensi);
     rect(100,240,35,230);
     rect(600,240,35,230);
     rect(1100,240,35,230);
+    popMatrix();
     
 }
