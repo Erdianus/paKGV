@@ -1,6 +1,6 @@
 PImage person;
-float xPerson = 580;
-float yPerson = 311;
+float xPerson = 565;
+float yPerson = 266;
 
 void setup() {
     size(1280, 720, P3D);
@@ -8,14 +8,16 @@ void setup() {
 }
 
 void draw() {
-    // rotateY(-mouseX * 0.0080);
+    pushMatrix();
+    translate(0, 0, -50);
     bgErdi();
+    popMatrix();
+    translate(0, 0, 50);
+    kursi();
     pushMatrix();
     translate(0, 0, 100);
     image(person, xPerson, yPerson);
     popMatrix();
-    // image(person2, 150, 0);
-    // image(person3, 350, 0);
 }
 
 // ! ERDI
@@ -32,11 +34,31 @@ color jalanan = #6A585D;
 color warnaPagar = #2B2D35;
 color warnaTiangPagar = #2B2D35;
 color warnaDimensiPagar = #7D7D89;
-
+void kursi(){
+    // alas duduk
+    fill(#443A3C);
+    quad(374, 460, 870, 460, 890, 490, 354, 490);
+    fill(#1A1618);
+    rect(354, 490, 535, 15);
+    // kaki kursi
+    fill(#0F0F15);
+    rect(364, 505, 21, 83);
+    rect(860, 505, 21, 83);
+    pushMatrix();
+    translate(0, 0, -1);
+    rect(404, 329, 21, 220);
+    rect(820, 329, 21, 220);
+    popMatrix();
+    // punggung kursi
+    pushMatrix();
+    fill(#1A1618);
+    translate(0, 0, 1);
+    rect(374, 329, 494, 31);
+    rect(374, 385, 494, 31);
+    popMatrix();
+}
 
 void bgErdi() {
-    
-    //background = #16C6F5;
     background(background);
     //awan
     awan(0,114,warnaAwan);
@@ -68,19 +90,12 @@ void bgErdi() {
         popMatrix();
         pohon(1070,370,pohon1);
     popMatrix();
-    
-    
-    
     //pagar
     pushMatrix();
     translate(0,0,50);
     dasarPagar(warnaTrotoar1, warnaTrotoar2, warnaTrotoar3, jalanan);
     pagar(warnaPagar, warnaTiangPagar ,warnaDimensiPagar);
     popMatrix();
-    
-    
-    
-    //System.out.println(mouseX+" "+mouseY);
 }
 
 void keyPressed() {
@@ -99,8 +114,6 @@ void keyPressed() {
             warnaTiangPagar = #2B2D35;
             warnaDimensiPagar = #7D7D89;
             person = loadImage("person1.png");
-            xPerson = 580;
-            yPerson = 311;
         } else if (keyCode == DOWN) {
             background = #FCBF2C;
             warnaAwan = #FCEE56;
@@ -115,8 +128,6 @@ void keyPressed() {
             warnaTiangPagar = #592708;
             warnaDimensiPagar = #592708;
             person = loadImage("person3.png");
-            xPerson = 599;
-            yPerson = 267;
         } 
     } else {
         background = #ff0000;
@@ -198,5 +209,4 @@ void pagar(color warnaPagar, color warnaPagarDimensi, color warnaTiangPagar) {
     rect(600,240,35,230);
     rect(1100,240,35,230);
     popMatrix();
-    
 }
