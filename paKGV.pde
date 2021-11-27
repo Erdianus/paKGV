@@ -1,5 +1,5 @@
-// import processing.sound.*;
-// SoundFile file;
+import processing.sound.*;
+SoundFile file;
 
 PImage person;
 PImage train;
@@ -18,15 +18,16 @@ void setup() {
     size(1280, 720, P3D);
     person = loadImage("person1.png");
     train = loadImage("kereta1.png");
-    // file = new SoundFile(this, "backsound.mp3");
-    // file.play();
+    file = new SoundFile(this, "backsound.mp3");
+    file.play();
     hint(ENABLE_DEPTH_SORT);
     
 }
-
+int sec;
+// 49
 void draw() {
-    println(second + " = " + second());
-    second++;
+    sec = parseInt(file.percent());
+    println(sec);
     pushMatrix();
     translate(0, 0, -50);
     bgErdi();
@@ -45,6 +46,18 @@ void draw() {
     
     popMatrix();    
     
+    if (sec == 50) {
+        lagiJalan = true;
+    }
+
+    // if (sec == 81) {
+    //     lagiJalan = true;
+    // }
+
+    // if (sec == 96) {
+    //     lagiJalan = true;
+    // }
+    
     if (lagiJalan) {
         if (xTrain > xTrainStop) {
             xTrain = xTrainBegin;
@@ -57,7 +70,7 @@ void draw() {
         xTrain += 100;
     }
     
-    if (xTrain == xTrainBegin + (100 * 20)) {
+    if (xTrain == xTrainBegin + (100 * 20) && sec > 49) {
         if (frame == 1) {
             lagiJalan = true;
             background = #16C6F5;
@@ -66,6 +79,7 @@ void draw() {
             yPerson = 205;
             frame++;
         } else if (frame == 2) {
+            brightness(#ffffff);
             lagiJalan = true;
             background = #FCBF2C;
             warnaAwan = #FCEE56;
@@ -148,27 +162,24 @@ float xAwan = 0;
 float yAwan = 0;
 
 void bgErdi() {
-    
-    
-    
     //background= #16C6F5;
     background(background);
     //awan
     pushMatrix();
     translate(xAwan, yAwan);
     awan(0,114,warnaAwan);
-    if (frame < 4) {
+    if (frame == 2) {
+        xAwan += 2;
+    } else {
         xAwan++;
     }
     if (xAwan > 1526.0) {
         xAwan = -1472.0;
     }  
-    if (frame > 1) {
+    if (frame == 2) {
         awan(600,100,warnaAwan);
         awan(320,120,warnaAwan);
         awan(900,120,warnaAwan);
-        
-
         if (frame == 3) {
             yAwan = 30;
         }
@@ -179,9 +190,9 @@ void bgErdi() {
     // 3DDDDDD
     if (frame == 2) {
         pushMatrix();
-        translate(-26, -40, 0);
+        translate( -26, -40, -40);
         lights();
-        fill(#FFA800);
+        fill(#FFFF00);
         sphere(109);
         noFill();
         noLights();
@@ -230,7 +241,7 @@ void bgErdi() {
 
 void keyPressed() {
     if (key == CODED) {
-        if (keyCode == RIGHT) {
+        if (keyCode == RIGHT && !lagiJalan && sec < 47 || sec > 52) {
             println("Jalan");
             lagiJalan = true;
         }
