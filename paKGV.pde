@@ -1,6 +1,6 @@
 PImage person;
 float xPerson = 565;
-float yPerson = 266;
+float yPerson = 241;
 
 void setup() {
     size(1280, 720, P3D);
@@ -35,6 +35,8 @@ color warnaPagar = #2B2D35;
 color warnaTiangPagar = #2B2D35;
 color warnaDimensiPagar = #7D7D89;
 void kursi(){
+    pushMatrix();
+    translate(0, -30, 0);
     // alas duduk
     fill(#443A3C);
     quad(374, 460, 870, 460, 890, 490, 354, 490);
@@ -55,6 +57,7 @@ void kursi(){
     translate(0, 0, 1);
     rect(374, 329, 494, 31);
     rect(374, 385, 494, 31);
+    popMatrix();
     popMatrix();
 }
 
@@ -114,6 +117,7 @@ void keyPressed() {
             warnaTiangPagar = #2B2D35;
             warnaDimensiPagar = #7D7D89;
             person = loadImage("person1.png");
+            yPerson = 241;
         } else if (keyCode == DOWN) {
             background = #FCBF2C;
             warnaAwan = #FCEE56;
@@ -128,6 +132,7 @@ void keyPressed() {
             warnaTiangPagar = #592708;
             warnaDimensiPagar = #592708;
             person = loadImage("person3.png");
+            yPerson = 206;
         } 
     } else {
         background = #ff0000;
