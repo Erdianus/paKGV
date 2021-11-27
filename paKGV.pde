@@ -1,6 +1,8 @@
+import processing.sound.*;
+SoundFile file;
+
 PImage person;
 PImage train;
-PShape person1;
 float xTrain = -13280;
 float xTrainBegin = -13280;
 float xTrainStop = 1303;
@@ -14,8 +16,9 @@ void setup() {
     size(1280, 720, P3D);
     person = loadImage("person1.png");
     train = loadImage("kereta1.png");
+    file = new SoundFile(this, "backsound.mp3");
+    file.play();
     hint(ENABLE_DEPTH_SORT);
-    person1 = loadShape("person1.svg");
 }
 
 void draw() {
@@ -81,7 +84,8 @@ void draw() {
             frame++;
         } else if (frame == 3) {
             xPerson = 10000;
-        }
+            frame++;
+        } 
     }
     
     // image(person2, 150, 0);
@@ -144,19 +148,26 @@ void bgErdi() {
     //background= #16C6F5;
     background(background);
     //awan
+    pushMatrix();
+    translate(xAwan, yAwan);
+    awan(0,114,warnaAwan);
+    if (frame < 4) {
+        xAwan++;
+    }
     if (frame > 1) {
-        pushMatrix();
-        translate(xAwan, 0);
-        awan(0,114,warnaAwan);
         awan(600,100,warnaAwan);
         awan(320,120,warnaAwan);
         awan(900,120,warnaAwan);
-        popMatrix();
-        xAwan++;
+        
         if (xAwan > 1526.0) {
             xAwan = -1472.0;
+        }  
+        
+        if (frame == 3) {
+            yAwan = 30;
         }
     }
+    popMatrix();
     //pohon
     pushMatrix();
     translate(0,0, 30);
@@ -165,15 +176,19 @@ void bgErdi() {
     pohon(100,370,pohon1);
     pohon(400,370,pohon2);
     popMatrix();
-    pohon(250,355,pohon3);
-    pohon(500,350,pohon1);
+    if (frame < 3) {
+        pohon(250,355,pohon3);
+        pohon(500,350,pohon1);
+    }
     pushMatrix();
     translate(0,0,9);
     pohon(620,360,pohon2);
     popMatrix();
     pushMatrix();
     translate(0,0,6);
-    pohon(700,400,pohon1);
+    if (frame < 3) {
+        pohon(700,400,pohon1);
+    }
     popMatrix();
     pushMatrix();
     translate(0,0,3);
@@ -185,7 +200,6 @@ void bgErdi() {
     
     //pagar
     pushMatrix();
-    lights();
     translate(0,0,50);
     dasarPagar(warnaTrotoar1, warnaTrotoar2, warnaTrotoar3, jalanan);
     pagar(warnaPagar, warnaTiangPagar ,warnaDimensiPagar);
