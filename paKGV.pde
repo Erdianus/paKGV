@@ -8,7 +8,7 @@ float frame = 1;
 boolean isBerubah = false;
 boolean lagiJalan = false;
 float xPerson = 565;
-float yPerson = 241;
+float yPerson = 250;
 
 void setup() {
     size(1280, 720, P3D);
