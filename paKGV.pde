@@ -1,14 +1,16 @@
 PImage person;
 PImage train;
 PShape person1;
-float xPerson = 580;
-float yPerson = 311;
+// float xPerson = 580;
+// float yPerson = 311;
 float xTrain = -13280;
 float xTrainBegin = -13280;
 float xTrainStop = 1303;
 float frame = 1;
 boolean isBerubah = false;
 boolean lagiJalan = false;
+float xPerson = 565;
+float yPerson = 241;
 
 void setup() {
     size(1280, 720, P3D);
@@ -18,8 +20,12 @@ void setup() {
 }
 
 void draw() {
-    // rotateY(-mouseX * 0.0080);
+    pushMatrix();
+    translate(0, 0, -50);
     bgErdi();
+    popMatrix();
+    translate(0, 0, 50);
+    kursi();
     pushMatrix();
     translate(0, 0, 100);
     image(person, xPerson, yPerson);
@@ -91,7 +97,32 @@ color jalanan = #6A585D;
 color warnaPagar = #2B2D35;
 color warnaTiangPagar = #2B2D35;
 color warnaDimensiPagar = #7D7D89;
-
+void kursi(){
+    pushMatrix();
+    translate(0, -30, 0);
+    // alas duduk
+    fill(#443A3C);
+    quad(374, 460, 870, 460, 890, 490, 354, 490);
+    fill(#1A1618);
+    rect(354, 490, 535, 15);
+    // kaki kursi
+    fill(#0F0F15);
+    rect(364, 505, 21, 83);
+    rect(860, 505, 21, 83);
+    pushMatrix();
+    translate(0, 0, -1);
+    rect(404, 329, 21, 220);
+    rect(820, 329, 21, 220);
+    popMatrix();
+    // punggung kursi
+    pushMatrix();
+    fill(#1A1618);
+    translate(0, 0, 1);
+    rect(374, 329, 494, 31);
+    rect(374, 385, 494, 31);
+    popMatrix();
+    popMatrix();
+}
 
 void bgErdi() {
     
@@ -222,5 +253,4 @@ void pagar(color warnaPagar, color warnaPagarDimensi, color warnaTiangPagar) {
     rect(600,240,35,230);
     rect(1100,240,35,230);
     popMatrix();
-    
 }
