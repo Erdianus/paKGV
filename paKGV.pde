@@ -1,8 +1,6 @@
 PImage person;
 PImage train;
 PShape person1;
-// float xPerson = 580;
-// float yPerson = 311;
 float xTrain = -13280;
 float xTrainBegin = -13280;
 float xTrainStop = 1303;
@@ -16,6 +14,7 @@ void setup() {
     size(1280, 720, P3D);
     person = loadImage("person1.png");
     train = loadImage("kereta1.png");
+    hint(ENABLE_DEPTH_SORT);
     person1 = loadShape("person1.svg");
 }
 
@@ -26,16 +25,17 @@ void draw() {
     popMatrix();
     translate(0, 0, 50);
     kursi();
-    pushMatrix();
-    translate(0, 0, 100);
-    image(person, xPerson, yPerson);
-    image(train, xTrain, 0);
-    // shape(person1, xPerson, yPerson);
-    popMatrix();
     
     pushMatrix();
-    translate(0, 0, 200);
+    translate(0, 0, 50);
+    image(person, xPerson, yPerson);
     popMatrix();
+
+    pushMatrix();
+    translate(0, 0, 51);
+    image(train, xTrain, 0);
+    
+    popMatrix();    
     
     if (lagiJalan) {
         if (xTrain > xTrainStop) {
@@ -53,8 +53,8 @@ void draw() {
             lagiJalan = true;
             background = #16C6F5;
             person = loadImage("person2.png");
-            xPerson = 583;
-            yPerson = 270;
+            // xPerson = 583;
+            yPerson = 205;
             frame++;
         } else if (frame == 2) {
             lagiJalan = true;
@@ -71,8 +71,8 @@ void draw() {
             warnaTiangPagar = #592708;
             warnaDimensiPagar = #592708;
             person = loadImage("person3.png");
-            xPerson = 599;
-            yPerson = 267;
+            // xPerson = 599;
+            yPerson = 205;
             frame++;
         } else if (frame == 3) {
             xPerson = 10000;
@@ -97,7 +97,7 @@ color jalanan = #6A585D;
 color warnaPagar = #2B2D35;
 color warnaTiangPagar = #2B2D35;
 color warnaDimensiPagar = #7D7D89;
-void kursi(){
+void kursi() {
     pushMatrix();
     translate(0, -30, 0);
     // alas duduk
