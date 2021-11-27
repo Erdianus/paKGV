@@ -1,5 +1,5 @@
-import processing.sound.*;
-SoundFile file;
+// import processing.sound.*;
+// SoundFile file;
 
 PImage person;
 PImage train;
@@ -12,16 +12,21 @@ boolean lagiJalan = false;
 float xPerson = 565;
 float yPerson = 250;
 
+int second = 0;
 void setup() {
+    
     size(1280, 720, P3D);
     person = loadImage("person1.png");
     train = loadImage("kereta1.png");
-    file = new SoundFile(this, "backsound.mp3");
-    file.play();
+    // file = new SoundFile(this, "backsound.mp3");
+    // file.play();
     hint(ENABLE_DEPTH_SORT);
+    
 }
 
 void draw() {
+    println(second + " = " + second());
+    second++;
     pushMatrix();
     translate(0, 0, -50);
     bgErdi();
@@ -87,9 +92,6 @@ void draw() {
             frame++;
         } 
     }
-    
-    // image(person2, 150, 0);
-    // image(person3, 350, 0);
 }
 
 // ERDI
@@ -141,9 +143,13 @@ void kursi() {
     popMatrix();
     popMatrix();
 }
+
 float xAwan = 0;
 float yAwan = 0;
+
 void bgErdi() {
+    
+    
     
     //background= #16C6F5;
     background(background);
@@ -154,20 +160,35 @@ void bgErdi() {
     if (frame < 4) {
         xAwan++;
     }
+    if (xAwan > 1526.0) {
+        xAwan = -1472.0;
+    }  
     if (frame > 1) {
         awan(600,100,warnaAwan);
         awan(320,120,warnaAwan);
         awan(900,120,warnaAwan);
         
-        if (xAwan > 1526.0) {
-            xAwan = -1472.0;
-        }  
-        
+
         if (frame == 3) {
             yAwan = 30;
         }
     }
+    
     popMatrix();
+    
+    // 3DDDDDD
+    if (frame == 2) {
+        pushMatrix();
+        translate(-26, -40, 0);
+        lights();
+        fill(#FFA800);
+        sphere(109);
+        noFill();
+        noLights();
+        popMatrix();
+        // ellipse( -26, -40, 109, 109);
+    }
+    
     //pohon
     pushMatrix();
     translate(0,0, 30);
