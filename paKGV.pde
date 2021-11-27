@@ -18,6 +18,7 @@ void setup() {
     size(1280, 720, P3D);
     person = loadImage("person1.png");
     train = loadImage("kereta1.png");
+    
     file = new SoundFile(this, "backsound.mp3");
     file.play();
     hint(ENABLE_DEPTH_SORT);
@@ -29,20 +30,20 @@ void draw() {
     sec = parseInt(file.percent());
     println(sec);
     pushMatrix();
-    translate(0, 0, -50);
-    bgErdi();
+        translate(0, 0, -50);
+        bgErdi();
     popMatrix();
     translate(0, 0, 50);
     kursi();
     
     pushMatrix();
-    translate(0, 0, 50);
-    image(person, xPerson, yPerson);
+        translate(0, 0, 50);
+        image(person, xPerson, yPerson);
     popMatrix();
     
     pushMatrix();
-    translate(0, 0, 51);
-    image(train, xTrain, 0);
+        translate(0, 0, 51);
+        image(train, xTrain, 0);
     
     popMatrix();    
     
@@ -133,28 +134,28 @@ color punggungKursi = #1A1618;
 
 void kursi() {
     pushMatrix();
-    translate(0, -30, 0);
-    // alas duduk
-    fill(alasDuduk);
-    quad(374, 460, 870, 460, 890, 490, 354, 490);
-    fill(alasDudukFront);
-    rect(354, 490, 535, 15);
-    // kaki kursi
-    fill(kakiKursi);
-    rect(364, 505, 21, 83);
-    rect(860, 505, 21, 83);
-    pushMatrix();
-    translate(0, 0, -1);
-    rect(404, 329, 21, 220);
-    rect(820, 329, 21, 220);
-    popMatrix();
-    // punggung kursi
-    pushMatrix();
-    fill(punggungKursi);
-    translate(0, 0, 1);
-    rect(374, 329, 494, 31);
-    rect(374, 385, 494, 31);
-    popMatrix();
+        translate(0, -30, 0);
+        // alas duduk
+        fill(alasDuduk);
+        quad(374, 460, 870, 460, 890, 490, 354, 490);
+        fill(alasDudukFront);
+        rect(354, 490, 535, 15);
+        // kaki kursi
+        fill(kakiKursi);
+        rect(364, 505, 21, 83);
+        rect(860, 505, 21, 83);
+        pushMatrix();
+        translate(0, 0, -1);
+        rect(404, 329, 21, 220);
+        rect(820, 329, 21, 220);
+        popMatrix();
+        // punggung kursi
+        pushMatrix();
+        fill(punggungKursi);
+        translate(0, 0, 1);
+        rect(374, 329, 494, 31);
+        rect(374, 385, 494, 31);
+        popMatrix();
     popMatrix();
 }
 
@@ -166,6 +167,7 @@ void bgErdi() {
     background(background);
     //awan
     pushMatrix();
+
     translate(xAwan, yAwan);
     awan(0,114,warnaAwan);
     if (frame == 2) {
@@ -185,6 +187,7 @@ void bgErdi() {
         }
     }
     
+
     popMatrix();
     
     // 3DDDDDD
@@ -202,39 +205,39 @@ void bgErdi() {
     
     //pohon
     pushMatrix();
-    translate(0,0, 30);
-    pushMatrix();
-    translate(0,0,12);
-    pohon(100,370,pohon1);
-    pohon(400,370,pohon2);
-    popMatrix();
-    if (frame < 3) {
-        pohon(250,355,pohon3);
-        pohon(500,350,pohon1);
-    }
-    pushMatrix();
-    translate(0,0,9);
-    pohon(620,360,pohon2);
-    popMatrix();
-    pushMatrix();
-    translate(0,0,6);
-    if (frame < 3) {
-        pohon(700,400,pohon1);
-    }
-    popMatrix();
-    pushMatrix();
-    translate(0,0,3);
-    pohon(1200,360,pohon3);
-    pohon(880,340,pohon2);
-    popMatrix();
-    pohon(1070,370,pohon1);
+        translate(0,0, 30);
+        pushMatrix();
+            translate(0,0,12);
+            pohon(100,370,pohon1);
+            pohon(400,370,pohon2);
+        popMatrix();
+        if (frame < 3) {
+            pohon(250,355,pohon3);
+            pohon(500,350,pohon1);
+        }
+        pushMatrix();
+            translate(0,0,9);
+            pohon(620,360,pohon2);
+        popMatrix();
+        pushMatrix();
+            translate(0,0,6);
+            if (frame < 3) {
+                pohon(700,400,pohon1);
+            }
+        popMatrix();
+        pushMatrix();
+            translate(0,0,3);
+            pohon(1200,360,pohon3);
+            pohon(880,340,pohon2);
+        popMatrix();
+        pohon(1070,370,pohon1);
     popMatrix();
     
     //pagar
     pushMatrix();
-    translate(0,0,50);
-    dasarPagar(warnaTrotoar1, warnaTrotoar2, warnaTrotoar3, jalanan);
-    pagar(warnaPagar, warnaTiangPagar ,warnaDimensiPagar);
+        translate(0,0,50);
+        dasarPagar(warnaTrotoar1, warnaTrotoar2, warnaTrotoar3, jalanan);
+        pagar(warnaPagar, warnaTiangPagar ,warnaDimensiPagar);
     popMatrix();
 }
 
@@ -302,28 +305,29 @@ void dasarPagar(color warnaTrotoar1, color warnaTrotoar2, color warnaTrotoar3, c
 void pagar(color warnaPagar, color warnaPagarDimensi, color warnaTiangPagar) {
     stroke(2);
     fill(warnaPagar);
-    rect(0,230,width,10);
-    rect(0,330,width,10);
-    rect(0,410,width,10);
-    
-    //dimensi pagar
-    // fill(warnaTiangPagar);
-    // rect(0,227,width,3);
-    // rect(0,327,width,3);
-    // rect(0,407,width,3);
-    // rect(135,240,3,230);
-    // rect(635,240,3,230);
-    // rect(1135,240,3,230);
-    
-    //tiang pagar atau pagar depan
     pushMatrix();
-    translate(0, 0, 2);
-    fill(warnaPagarDimensi);
-    rect(100,240,35,230);
-    rect(600,240,35,230);
-    rect(1100,240,35,230);
+        translate(0, 233, 0);
+        box(width+width, 10, 10);
     popMatrix();
-}
-void pagarMy(color warnaPagar, color warnaPagarDimensi, color warnaTiangPagar) {
-    
+    pushMatrix();
+        translate(0, 330, 0);
+        box(width+width, 10, 10);
+    popMatrix();
+    pushMatrix();
+        translate(0, 401, 0);
+        box(width+width, 10, 10);
+    popMatrix();
+    fill(warnaPagarDimensi);
+    pushMatrix();
+        translate(100, 345, 0);
+        box(35, 230, 10);
+    popMatrix();
+    pushMatrix();
+        translate(600, 345, 0);
+        box(35, 230, 10);
+    popMatrix();
+    pushMatrix();
+        translate(1100, 345, 0);
+        box(35, 230, 10);
+    popMatrix();
 }
