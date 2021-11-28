@@ -79,7 +79,6 @@ void draw() {
                 isUp = true;
             }
         }
-        println(yCat);
     }
     
     if (sec == 50) {
