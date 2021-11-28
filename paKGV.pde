@@ -110,10 +110,10 @@ void draw() {
                 train = loadImage("kereta2.png");
             }
         }
-        xTrain += 105;
+        xTrain += 130;
     }
     
-    if (xTrain == xTrainBegin + (105 * 50) && trans) {
+    if (xTrain == xTrainBegin + (130 * 100) && trans) {
         println("Berubah");
         trans = false;
         if (frame == 1) {
