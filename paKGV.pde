@@ -3,18 +3,19 @@ SoundFile file;
 
 PImage person;
 PImage train;
-float xTrain = -13280;
-float xTrainBegin = -13280;
+float xTrain = -14280;
+float xTrainBegin = -14280;
 float xTrainStop = 1303;
 float frame = 1;
 boolean isBerubah = false;
+boolean trans = false;
 boolean lagiJalan = false;
 float xPerson = 565;
 float yPerson = 250;
+color background = #A2D9F6;
 
 int second = 0;
 void setup() {
-    
     size(1280, 720, P3D);
     person = loadImage("person1.png");
     train = loadImage("kereta1.png");
@@ -24,39 +25,74 @@ void setup() {
     
 }
 int sec;
-// 49
 void draw() {
+    background(background);
+    if (frame != 5) {
+        pushMatrix();
+        translate(0, 0, -50);
+        bgErdi();
+        popMatrix();
+        translate(0, 0, 50);
+        kursi();
+        
+        pushMatrix();
+        translate(0, 0, 50);
+        image(person, xPerson, yPerson);
+        popMatrix();
+        
+    } else {
+        // F
+        pushMatrix();
+        stroke(#ffffff);
+        strokeWeight(2);
+        // translate(100, 100);
+        line(397.5, 125, 397.5, 556.73);
+        line(397, 124.5, 561.63, 124.5);
+        line(397, 273.84, 530.06, 273.84);
+        
+        // I
+        line(618.5, 125, 618.5, 557);
+        
+        // N
+        // bezier(701.6, 554, 696, 128, 883, 554, 876.28, 128);
+        beginShape();
+        noFill();
+        curveVertex(701.6, 554);
+        curveVertex(701.6, 554);
+        curveVertex(696, 128);
+        curveVertex(883, 554);
+        curveVertex(876.28, 128);
+        curveVertex(876.28, 128);
+        endShape();
+        noStroke();
+        popMatrix();
+    }
     sec = parseInt(file.percent());
-    println(sec);
-    pushMatrix();
-    translate(0, 0, -50);
-    bgErdi();
-    popMatrix();
-    translate(0, 0, 50);
-    kursi();
-    
-    pushMatrix();
-    translate(0, 0, 50);
-    image(person, xPerson, yPerson);
-    popMatrix();
     
     pushMatrix();
     translate(0, 0, 51);
     image(train, xTrain, 0);
-    
     popMatrix();    
     
     if (sec == 50) {
         lagiJalan = true;
+        trans = true;
     }
-
-    // if (sec == 81) {
-    //     lagiJalan = true;
-    // }
-
-    // if (sec == 96) {
-    //     lagiJalan = true;
-    // }
+    
+    if (sec == 81) {
+        lagiJalan = true;
+        trans = true;
+    }
+    
+    if (sec == 96) {
+        lagiJalan = true;
+        trans = true;
+    }
+    
+    if (sec == 0 && frame == 4) {
+        lagiJalan = true;
+        trans = true;
+    }
     
     if (lagiJalan) {
         if (xTrain > xTrainStop) {
@@ -70,17 +106,20 @@ void draw() {
         xTrain += 100;
     }
     
-    if (xTrain == xTrainBegin + (100 * 20) && sec > 49) {
+    if (xTrain == xTrainBegin + (100 * 50) && trans) {
+        println("Berubah");
+        trans = false;
         if (frame == 1) {
+            // Menuju Frame 2
             lagiJalan = true;
             background = #16C6F5;
             person = loadImage("person2.png");
-            // xPerson = 583;
             yPerson = 205;
             frame++;
         } else if (frame == 2) {
-            brightness(#ffffff);
+            // Menuju frame 3
             lagiJalan = true;
+            brightness(#ffffff);
             background = #FCBF2C;
             warnaAwan = #FCEE56;
             pohon1 = #98561D;
@@ -98,19 +137,22 @@ void draw() {
             punggungKursi = #55240A;
             kakiKursi = #542B0A;
             person = loadImage("person3.png");
-            // xPerson = 599;
             yPerson = 205;
             frame++;
         } else if (frame == 3) {
+            // Menuju frame 4
             xPerson = 10000;
             frame++;
-        } 
+        } else if (frame == 4) {
+            // menuju frame 5
+            background = #000000;
+            frame++;
+        }
     }
 }
 
 // ERDI
 
-color background = #A2D9F6;
 color warnaAwan = #E5E5E5;
 color pohon1 = #349847;
 color pohon2 = #267E31;
@@ -162,8 +204,6 @@ float xAwan = 0;
 float yAwan = 0;
 
 void bgErdi() {
-    //background= #16C6F5;
-    background(background);
     //awan
     pushMatrix();
     translate(xAwan, yAwan);
@@ -241,9 +281,10 @@ void bgErdi() {
 
 void keyPressed() {
     if (key == CODED) {
-        if (keyCode == RIGHT && !lagiJalan && sec < 47 || sec > 52) {
+        if (keyCode == RIGHT && !lagiJalan && sec < 47 || sec > 52 && sec < 78 || sec > 83 && sec < 93 || sec > 99) {
             println("Jalan");
             lagiJalan = true;
+            trans = false;
         }
     }
 }
