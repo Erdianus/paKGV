@@ -1,4 +1,4 @@
-import processing.sound.*;
+import processing.sound.*; /* Install Dulu library sound */
 SoundFile file;
 
 PImage person;
@@ -14,7 +14,6 @@ float xPerson = 565;
 float yPerson = 250;
 color background = #A2D9F6;
 
-int second = 0;
 void setup() {
     size(1280, 720, P3D);
     person = loadImage("person1.png");
@@ -32,8 +31,10 @@ void draw() {
         translate(0, 0, -50);
         bgErdi();
         popMatrix();
-        translate(0, 0, 50);
+        pushMatrix();
+        translate(0, 0, 30);
         kursi();
+        popMatrix();
         
         pushMatrix();
         translate(0, 0, 50);
@@ -46,17 +47,24 @@ void draw() {
         stroke(#ffffff);
         strokeWeight(2);
         // translate(100, 100);
+        noFill();
+        beginShape();
         line(397.5, 125, 397.5, 556.73);
         line(397, 124.5, 561.63, 124.5);
         line(397, 273.84, 530.06, 273.84);
+        endShape();
         
         // I
-        line(618.5, 125, 618.5, 557);
+        beginShape();
+        curveVertex(618.5, 125);
+        curveVertex(618.5, 125);
+        curveVertex(618.5, 557);
+        curveVertex(618.5, 557);
+        endShape();
         
         // N
         // bezier(701.6, 554, 696, 128, 883, 554, 876.28, 128);
         beginShape();
-        noFill();
         curveVertex(701.6, 554);
         curveVertex(701.6, 554);
         curveVertex(696, 128);
@@ -151,8 +159,6 @@ void draw() {
     }
 }
 
-// ERDI
-
 color warnaAwan = #E5E5E5;
 color pohon1 = #349847;
 color pohon2 = #267E31;
@@ -206,7 +212,7 @@ float yAwan = 0;
 void bgErdi() {
     //awan
     pushMatrix();
-    translate(xAwan, yAwan);
+    translate(xAwan, yAwan, 20);
     awan(0,114,warnaAwan);
     if (frame == 2) {
         xAwan += 2;
@@ -231,13 +237,12 @@ void bgErdi() {
     if (frame == 2) {
         pushMatrix();
         translate( -26, -40, -40);
-        lights();
         fill(#FFFF00);
+        directionalLight(255, 255, 255, -1, 0, 0);
         sphere(109);
         noFill();
         noLights();
         popMatrix();
-        // ellipse( -26, -40, 109, 109);
     }
     
     //pohon
@@ -281,7 +286,7 @@ void bgErdi() {
 
 void keyPressed() {
     if (key == CODED) {
-        if (keyCode == RIGHT && !lagiJalan && sec < 47 || sec > 52 && sec < 78 || sec > 83 && sec < 93 || sec > 99) {
+        if (keyCode == RIGHT && !lagiJalan && sec < 47 || sec > 52 && sec < 78 || sec > 83 && sec < 93 || sec > 99 && frame != 5) {
             println("Jalan");
             lagiJalan = true;
             trans = false;
@@ -347,15 +352,6 @@ void pagar(color warnaPagar, color warnaPagarDimensi, color warnaTiangPagar) {
     rect(0,330,width,10);
     rect(0,410,width,10);
     
-    //dimensi pagar
-    // fill(warnaTiangPagar);
-    // rect(0,227,width,3);
-    // rect(0,327,width,3);
-    // rect(0,407,width,3);
-    // rect(135,240,3,230);
-    // rect(635,240,3,230);
-    // rect(1135,240,3,230);
-    
     //tiang pagar atau pagar depan
     pushMatrix();
     translate(0, 0, 2);
@@ -365,6 +361,4 @@ void pagar(color warnaPagar, color warnaPagarDimensi, color warnaTiangPagar) {
     rect(1100,240,35,230);
     popMatrix();
 }
-void pagarMy(color warnaPagar, color warnaPagarDimensi, color warnaTiangPagar) {
-    
-}
+
