@@ -2,27 +2,34 @@ import processing.sound.*; /* Install Dulu library sound */
 SoundFile file;
 
 PImage person;
+PImage cat;
 PImage train;
 float xTrain = -14280;
 float xTrainBegin = -14280;
 float xTrainStop = 1303;
 int frame = 1;
 boolean isBerubah = false;
+boolean isLompat = false;
+boolean isUp = false;
 boolean trans = false;
 boolean lagiJalan = false;
 float xPerson = 565;
 float yPerson = 250;
+float xCat = 434;
+float yCat = 370;
 color background = #A2D9F6;
 
 void setup() {
     size(1280, 720, P3D);
     person = loadImage("person1.png");
+    cat = loadImage("kucing.png");
     train = loadImage("kereta1.png");
     file = new SoundFile(this, "backsound.mp3");
     file.play();
     hint(ENABLE_DEPTH_SORT);
     
 }
+float catIncrement = 10;
 int sec;
 void draw() {
     background(background);
@@ -41,46 +48,39 @@ void draw() {
         image(person, xPerson, yPerson);
         popMatrix();
         
+        if (frame == 2){
+            pushMatrix();
+            translate(0, 0, 50);
+            image(cat, xCat, yCat);
+            popMatrix();
+        }
     } else {
-        // F
-        pushMatrix();
-        stroke(#ffffff);
-        strokeWeight(2);
-        // translate(100, 100);
-        noFill();
-        beginShape();
-        line(397.5, 125, 397.5, 556.73);
-        line(397, 124.5, 561.63, 124.5);
-        line(397, 273.84, 530.06, 273.84);
-        endShape();
-        
-        // I
-        beginShape();
-        curveVertex(618.5, 125);
-        curveVertex(618.5, 125);
-        curveVertex(618.5, 557);
-        curveVertex(618.5, 557);
-        endShape();
-        
-        // N
-        // bezier(701.6, 554, 696, 128, 883, 554, 876.28, 128);
-        beginShape();
-        curveVertex(701.6, 554);
-        curveVertex(701.6, 554);
-        curveVertex(696, 128);
-        curveVertex(883, 554);
-        curveVertex(876.28, 128);
-        curveVertex(876.28, 128);
-        endShape();
-        noStroke();
-        popMatrix();
+        fin();
     }
     sec = parseInt(file.percent());
     
+    
+
     pushMatrix();
     translate(0, 0, 51);
     image(train, xTrain, 0);
     popMatrix();    
+
+    if (isLompat) {
+        if (isUp) {
+            yCat += 10;
+            if (yCat == 370) {
+                isLompat = false;
+                isUp = false;
+            }
+        } else {
+            yCat -= 10;
+            if (yCat <= 250) {
+                isUp = true;
+            }
+        }
+        println(yCat);
+    }
     
     if (sec == 50) {
         lagiJalan = true;
@@ -111,10 +111,10 @@ void draw() {
                 train = loadImage("kereta2.png");
             }
         }
-        xTrain += 100;
+        xTrain += 105;
     }
     
-    if (xTrain == xTrainBegin + (100 * 50) && trans) {
+    if (xTrain == xTrainBegin + (105 * 50) && trans) {
         println("Berubah");
         trans = false;
         if (frame == 1) {
@@ -178,6 +178,41 @@ color alasDudukFront = #1A1618;
 color kakiKursi = #0F0F15;
 color punggungKursi = #1A1618;
 
+
+void fin() {
+        // F
+        pushMatrix();
+        stroke(#ffffff);
+        strokeWeight(2);
+        // translate(100, 100);
+        noFill();
+        beginShape();
+        line(397.5, 125, 397.5, 556.73);
+        line(397, 124.5, 561.63, 124.5);
+        line(397, 273.84, 530.06, 273.84);
+        endShape();
+        
+        // I
+        beginShape();
+        curveVertex(618.5, 125);
+        curveVertex(618.5, 125);
+        curveVertex(618.5, 557);
+        curveVertex(618.5, 557);
+        endShape();
+        
+        // N
+        // bezier(701.6, 554, 696, 128, 883, 554, 876.28, 128);
+        beginShape();
+        curveVertex(701.6, 554);
+        curveVertex(701.6, 554);
+        curveVertex(696, 128);
+        curveVertex(883, 554);
+        curveVertex(876.28, 128);
+        curveVertex(876.28, 128);
+        endShape();
+        noStroke();
+        popMatrix();
+}
 
 void kursi() {
     pushMatrix();
@@ -290,6 +325,8 @@ void keyPressed() {
             println("Jalan");
             lagiJalan = true;
             trans = false;
+        }else if (keyCode == UP && frame == 2){
+            isLompat = true;
         }
     }
 }
