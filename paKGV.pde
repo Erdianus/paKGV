@@ -6,7 +6,7 @@ PImage train;
 float xTrain = -14280;
 float xTrainBegin = -14280;
 float xTrainStop = 1303;
-float frame = 1;
+int frame = 1;
 boolean isBerubah = false;
 boolean trans = false;
 boolean lagiJalan = false;
@@ -286,7 +286,7 @@ void bgErdi() {
 
 void keyPressed() {
     if (key == CODED) {
-        if (keyCode == RIGHT && !lagiJalan && sec < 47 || sec > 52 && sec < 78 || sec > 83 && sec < 93 || sec > 99 && frame != 5) {
+        if (keyCode == RIGHT && !lagiJalan && (sec < 47 || sec > 52) && (sec < 78 || sec > 83) && (sec < 93 || sec > 99) ) {
             println("Jalan");
             lagiJalan = true;
             trans = false;
