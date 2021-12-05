@@ -59,8 +59,6 @@ void draw() {
     }
     sec = parseInt(file.percent());
     
-    
-
     pushMatrix();
     translate(0, 0, 51);
     image(train, xTrain, 0);
@@ -110,10 +108,10 @@ void draw() {
                 train = loadImage("kereta2.png");
             }
         }
-        xTrain += 130;
+        xTrain += 100;
     }
     
-    if (xTrain == xTrainBegin + (130 * 100) && trans) {
+    if (xTrain == xTrainBegin + (100 * 100) && trans) {
         println("Berubah");
         trans = false;
         if (frame == 1) {
